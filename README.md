@@ -2,6 +2,11 @@
 
 Welcome to the **Chessboard Sequences Simulation**, a high-performance Python engine for simulating mathematical piece-placement games on arbitrary chessboard layouts (scaling seamlessly up to 10,000 x 10,000 grids and beyond).
 
+This repository was motivated by the recent Numberphile video 'Red & Black Knights': https://www.youtube.com/watch?v=UiX4CFIiegM
+I wrote the code because I found the patterns very intriguing and I wanted to generate my own patterns. 
+This project is a mixture of math, art, and chess. I invite everyone to try generate some beautiful patterns of their own.
+
+
 ## 🎲 The Game Rules
 
 This project simulates a mathematical placement game played by two or more players on an $N \times N$ chessboard. The rules are simple but lead to immensely complex and beautiful emergent patterns:
