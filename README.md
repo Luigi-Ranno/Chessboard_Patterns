@@ -1,11 +1,11 @@
 # Chessboard Sequences Simulation
 
-Welcome to the **Chessboard Sequences Simulation**, a high-performance Python engine for simulating mathematical piece-placement games on arbitrary chessboard layouts (scaling seamlessly up to 10,000 x 10,000 grids and beyond).
+Welcome to the **Chessboard Sequences Simulation**, a high-performance Python engine for simulating mathematical piece-placement games on arbitrary chessboard layouts (scaling seamlessly up to 10,000 x 10,000 grids and beyond). 
 
 This repository was motivated by the recent Numberphile video 'Red & Black Knights': https://www.youtube.com/watch?v=UiX4CFIiegM
 
 I wrote the code because I found the patterns very intriguing and I wanted to generate my own patterns. 
-This project is a mixture of math, art, and chess. I invite everyone to try generate some beautiful patterns of their own.
+This project is a mixture of math, art, and chess. I invite everyone to try generate some **beautiful** patterns of their own.
 
 
 ## 🎲 The Game Rules
@@ -15,10 +15,39 @@ This project simulates a mathematical placement game played by two or more playe
 1. **The Sequence**: Every square on the board is numbered sequentially (e.g., from 1 to $N^2$). This defines a strict priority order for placing pieces.
 2. **The Turn**: On their turn, a player must place their piece on the **lowest available numbered square**.
 3. **The Conflict**: A square is considered "available" only if it is empty AND **not attacked by any opponent's piece**.
+   - **Single-Player Mode**: If only 1 player is configured, they play a *self-avoiding* game—they can only place a piece on a square that is **not attacked by their own previously placed pieces**.
 4. **The Players**: Each player is assigned a specific color and a rotating sequence of pieces. For example, a player could have `['Knight', 'Bishop']`, placing a Knight on their first turn, a Bishop on their second, a Knight on their third, etc.
 5. **The End**: A player who has no legal moves left simply skips their turn. The simulation ends when *no player* has any legal moves remaining.
 
-Because pieces control different patterns of squares (often reaching across the entire board), their interactions dictate which squares remain available for opponents, generating incredible fractal-like formations.
+Because pieces control different patterns of squares (often reaching across the entire board), their interactions dictate which squares remain available, generating beautiful emergent art.
+
+## 🎨 Creating Artistic Patterns
+
+You can control exactly how the simulation runs and looks by editing the `main()` function in `game.py`.
+
+### Visual Settings
+Inside `game.py`, you can tweak the following boolean options to customize the output:
+- `ANIMATE`: Generates a step-by-step GIF showing the board filling up turn-by-turn. *(Recommended for small boards only, $N \le 30$)*
+- `SHOW_NUMBERS`: Overlays the sequence number on each square.
+- `SHOW_LABELS`: Overlays a 2-letter abbreviation of the piece placed on that square.
+- `PIXEL_MODE`: Generates a massive, high-resolution PNG where 1 square = 1 pixel. This bypasses `matplotlib` entirely and allows you to render $10,000 \times 10,000$ boards instantly.
+
+### Board Sequences
+The pattern heavily depends on the order in which squares are evaluated. In `game.py`, try changing `generate_inverted_spiral(N)` to one of the following imported from `generate_chessboards.py`:
+- `generate_spiral(N)`: Archimedean spiral starting from the center.
+- `generate_inverted_spiral(N)`: Archimedean spiral starting from the outside edge.
+- `generate_raster(N)`: Standard left-to-right, top-to-bottom reading order.
+- `generate_snake(N)`: Left-to-right, then right-to-left continuous snake pattern.
+
+### Suggested Combinations
+To get started generating art, try these combinations in `game.py`:
+
+- **The Classic Cross**: `Rook` vs `Rook` on an Inverted Spiral. Sliders lock the board down incredibly fast, leaving stark, minimal geometric lines.
+- **Fractal Leapers**: `Knight` vs `Knight` on a Spiral board. Leapers create beautiful, dense, woven carpet patterns.
+- **The Asymmetric War**: Player 1: `['Dragon']` (very powerful) vs Player 2: `['Knight', 'Camel', 'Zebra']` (multiple weak leapers).
+- **Solo Explorer**: A 1-player game with `['Queen', 'Knight']` on a Raster board.
+
+Check out the **`examples/`** folder in this repository to see some of the stunning high-resolution art that can be generated!
 
 ## 🚀 Extreme Performance
 
@@ -33,6 +62,8 @@ To achieve this, the engine employs extreme optimizations:
 ## ♟️ Supported Pieces
 
 The engine natively supports both standard chess pieces and a vast array of Fairy Chess pieces. 
+
+To see exactly how any piece moves and attacks, check the **`piece_moves/`** directory! You can generate these diagrams yourself by running `python generate_piece_moves.py`.
 
 ### Leapers (Fixed-distance jumpers)
 Leapers jump directly to a target square, ignoring any pieces in between. 
@@ -85,10 +116,10 @@ Open `game.py` and modify the `main()` function. You can set the board size `N` 
 # game.py
 N = 1000 # Try 10 for animations, 1000 for quick tests, 10000 for extreme scale
 
+# Use standard web colors, hex codes, or RGB tuples
 players = [
     {'color': '#E2725B', 'pieces': ['Knight', 'Camel']}, # Player 1 (Reddish)
     {'color': '#8A9A5B', 'pieces': ['Stag', 'King']},    # Player 2 (Greenish)
-    {'color': '#DCAE96', 'pieces': ['Ferz', 'Wazir']},   # Player 3 (Peach)
 ]
 ```
 

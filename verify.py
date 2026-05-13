@@ -57,10 +57,14 @@ def reference_simulate(N, sequence, players_config):
                 r, c = int(s_rows[idx]), int(s_cols[idx])
                 if occupied[r, c] == -1:
                     dominated = False
-                    for p in range(num_players):
-                        if p != pid and control[p, r, c] > 0:
+                    if num_players == 1:
+                        if control[0, r, c] > 0:
                             dominated = True
-                            break
+                    else:
+                        for p in range(num_players):
+                            if p != pid and control[p, r, c] > 0:
+                                dominated = True
+                                break
                     if not dominated:
                         occupied[r, c] = pid
                         piece_owner[r, c] = pid
@@ -169,6 +173,7 @@ if __name__ == "__main__":
     print("SMALL BOARD TESTS (brute-force verifiable)")
     print("=" * 80)
     all_ok = True
+    all_ok &= run_test(8, [{'color':'r','pieces':['Knight']}], "Single Player Knight (8x8)")
     all_ok &= run_test(4, [{'color':'r','pieces':['Knight']},{'color':'b','pieces':['Knight']}], "Knight vs Knight")
     all_ok &= run_test(8, [{'color':'r','pieces':['Knight']},{'color':'b','pieces':['Knight']}], "Knight vs Knight")
     all_ok &= run_test(8, [{'color':'r','pieces':['Rook']},{'color':'b','pieces':['Rook']}], "Rook vs Rook")

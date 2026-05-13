@@ -159,12 +159,15 @@ def _simulate(N, num_players, search_rows, search_cols, total_cells,
                 c = search_cols[idx]
 
                 if occupied[r, c] == -1:
-                    # Check enemy control
                     dominated = False
-                    for p in range(num_players):
-                        if p != pid and control_count[p, r, c] > 0:
+                    if num_players == 1:
+                        if control_count[0, r, c] > 0:
                             dominated = True
-                            break
+                    else:
+                        for p in range(num_players):
+                            if p != pid and control_count[p, r, c] > 0:
+                                dominated = True
+                                break
 
                     if not dominated:
                         # --- Place piece ---
@@ -489,8 +492,8 @@ def main():
 
     players = [
         {'color': '#E2725B', 'pieces': ['Knight', ]},
-        {'color': '#8A9A5B', 'pieces': [ 'stag', 'king' ]},
-        {'color': '#DCAE96', 'pieces': [ 'ferz', 'wazir' ]},
+        # {'color': '#8A9A5B', 'pieces': [ 'stag', 'king' ]},
+        # {'color': '#DCAE96', 'pieces': [ 'ferz', 'wazir' ]},
     ]
 
     t0 = time.time()
