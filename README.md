@@ -10,6 +10,9 @@ I invite everyone to try generate some **beautiful** patterns of their own.
 
 The code in this repo was written with the aid of agentic tools (Antigravity). If you find any bugs, or have any features or suggested improvements, please contact Luigi Ranno.
 
+![Inv-Spiral_Knight_VS_Stag_King_VS_Ferz_Wazir_N=1000](examples/Inv-Spiral_Knight_VS_Stag_King_VS_Ferz_Wazir_N=1000.png)
+
+
 ## 🎲 The Game Rules
 
 This project simulates a mathematical placement game played by two or more players on an $N \times N$ chessboard. The rules are simple but lead to immensely complex and beautiful emergent patterns:
