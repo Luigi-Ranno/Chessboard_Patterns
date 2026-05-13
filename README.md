@@ -5,8 +5,10 @@ Welcome to the **Chessboard Sequences Simulation**, a high-performance Python en
 This repository was motivated by the recent Numberphile video 'Red & Black Knights': https://www.youtube.com/watch?v=UiX4CFIiegM
 
 I wrote the code because I found the patterns very intriguing and I wanted to generate my own patterns. 
-This project is a mixture of math, art, and chess. I invite everyone to try generate some **beautiful** patterns of their own.
+This project is a mixture of math, art, and chess. 
+I invite everyone to try generate some **beautiful** patterns of their own.
 
+The code in this repo was written with the aid of agentic tools (Antigravity). If you find any bugs, or have any features or suggested improvements, please contact Luigi Ranno.
 
 ## 🎲 The Game Rules
 
@@ -18,6 +20,7 @@ This project simulates a mathematical placement game played by two or more playe
    - **Single-Player Mode**: If only 1 player is configured, they play a *self-avoiding* game—they can only place a piece on a square that is **not attacked by their own previously placed pieces**.
 4. **The Players**: Each player is assigned a specific color and a rotating sequence of pieces. For example, a player could have `['Knight', 'Bishop']`, placing a Knight on their first turn, a Bishop on their second, a Knight on their third, etc.
 5. **The End**: A player who has no legal moves left simply skips their turn. The simulation ends when *no player* has any legal moves remaining.
+6. **The Interactions**: While leapers do not care of what new pieces are added, 'sliders' (e.g. rooks, queens, etc.) can have their vision blocked by pieces. This can lead to some interesting behaviours where a square that was not accessible to a player before, becomes accessible after the vision of a piece gets blocked. This interaction can lead to some very interesting patterns.
 
 Because pieces control different patterns of squares (often reaching across the entire board), their interactions dictate which squares remain available, generating beautiful emergent art.
 
@@ -61,9 +64,13 @@ To achieve this, the engine employs extreme optimizations:
 
 ## ♟️ Supported Pieces
 
-The engine natively supports both standard chess pieces and a vast array of Fairy Chess pieces. 
+The engine natively supports both standard chess pieces and a vast array of Fairy Chess pieces. To learn more about Fairy Chess, please get started with https://en.wikipedia.org/wiki/Fairy_chess. 
 
 To see exactly how any piece moves and attacks, check the **`piece_moves/`** directory! You can generate these diagrams yourself by running `python generate_piece_moves.py`.
+
+The list of Fairy Chess pieces is very long (https://en.wikipedia.org/wiki/List_of_fairy_chess_pieces), if you are intrigued by certain pieces feel free to implement, or contact me and I will try implementing it. 
+
+Currently, the following pieces are implemented:
 
 ### Leapers (Fixed-distance jumpers)
 Leapers jump directly to a target square, ignoring any pieces in between. 
@@ -116,6 +123,15 @@ Open `game.py` and modify the `main()` function. You can set the board size `N` 
 # game.py
 N = 1000 # Try 10 for animations, 1000 for quick tests, 10000 for extreme scale
 
+# Set the options you want. Suggest 'ANIMATE', 'SHOW_NUMBERS' and 'SHOW_LABELS' to True and PIXEL_MODE to False when you are trying to debug or see how patterns form (use small boards).
+# Otherwise, keep these settings to generate large images 
+# --- Options ---
+ANIMATE = False          # Generate step-by-step GIF (small boards only)
+SHOW_NUMBERS = False     # Draw sequence numbers on squares
+SHOW_LABELS = False      # Draw piece abbreviations on placed squares
+PIXEL_MODE = True       # Also save high-res 1px-per-square image
+
+# Then, set the players and their pieces
 # Use standard web colors, hex codes, or RGB tuples
 players = [
     {'color': '#E2725B', 'pieces': ['Knight', 'Camel']}, # Player 1 (Reddish)
@@ -136,3 +152,4 @@ If you want to see exactly how a "Zebra" or an "Empress" moves, you can generate
 python generate_piece_moves.py
 ```
 This will populate the `piece_moves/` folder with helpful diagrams showing the piece placed in the center of an empty board.
+The piece moves of all the supported pieces are already available in the folder. If you implement anything new and want to check, feel free to use generate_piece_moves.py to check the implementation is correct.
