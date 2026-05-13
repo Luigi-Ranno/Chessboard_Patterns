@@ -11,7 +11,7 @@ I invite everyone to try generate some **beautiful** patterns of their own.
 The code in this repo was written with the aid of agentic tools (Antigravity). If you find any bugs, or have any features or suggested improvements, please contact Luigi Ranno.
 
 
-With no effort, you can also try generating mesmerizing patterns like the following, which is caused by the battle of Knight vs Stag + King vs Ferz + Wazir:
+With no effort, you can also generate mesmerizing patterns like the following, which is caused by the battle of Knight vs Stag + King vs Ferz + Wazir:
 ![Inv-Spiral_Knight_VS_Stag_King_VS_Ferz_Wazir_N=1000](examples/Inv-Spiral_Knight_VS_Stag_King_VS_Ferz_Wazir_N=1000.png)
 
 
